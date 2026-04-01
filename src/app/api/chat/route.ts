@@ -38,7 +38,7 @@ Rules:
 - Maintain a friendly, expert tone`;
 
   const result = streamText({
-    model: anthropic("claude-sonnet-4-20250514"),
+    model: anthropic("claude-3-5-sonnet-20241022"),
     system: systemPrompt,
     messages,
   });
