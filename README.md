@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pulse AI
+
+**AI-native journalism covering Technology, AI & Science.**
+
+Pulse AI is a premium news platform where every article is researched, written, and editorially reviewed through a multi-step AI pipeline. Built with Next.js, Supabase, and Tailwind CSS.
+
+## Tech Stack
+
+- **Next.js 14+** — App Router, React Server Components, TypeScript
+- **Tailwind CSS** — Custom design system with Playfair Display, Inter, JetBrains Mono
+- **Supabase** — PostgreSQL database with Row Level Security
+- **shadcn/ui** — Base UI components (Button, Badge, Card, Sheet)
+- **react-markdown** + **remark-gfm** — Article content rendering
+- **next-themes** — Dark/light mode support
+- **Lucide React** — Icons
+
+## Prerequisites
+
+- **Node.js** 18+
+- **pnpm** (recommended) — `npm install -g pnpm`
+- **Supabase** account — [supabase.com](https://supabase.com)
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Savage27z/savage-news.git
+cd savage-news
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Create a Supabase project
 
-## Learn More
+1. Go to [supabase.com/dashboard](https://supabase.com/dashboard) and create a new project
+2. Note your **Project URL** and **anon (public) key** from Settings → API
+3. Note your **service_role key** from the same page (keep this secret)
 
-To learn more about Next.js, take a look at the following resources:
+### 4. Run database migrations
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+In your Supabase dashboard, go to **SQL Editor** and run the following files in order:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. `supabase/migrations/001_schema.sql` — Creates the `categories` and `articles` tables with indexes and RLS policies
+2. `supabase/migrations/002_seed.sql` — Seeds 5 categories and 8 articles with full content
 
-## Deploy on Vercel
+### 5. Set environment variables
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+cp .env.local.example .env.local
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Edit `.env.local` with your Supabase credentials:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+```
+
+### 6. Start the development server
+
+```bash
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to see Pulse AI.
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── layout.tsx            # Root layout (fonts, theme, header/footer)
+│   ├── page.tsx              # Homepage
+│   ├── article/[slug]/       # Individual article pages
+│   ├── category/[slug]/      # Category listing pages
+│   ├── about/                # About page
+│   └── not-found.tsx         # 404 page
+├── components/
+│   ├── layout/               # Header, Footer, MobileNav, ThemeProvider
+│   ├── articles/             # HeroArticle, ArticleCard, ArticleGrid, etc.
+│   └── home/                 # TrendingBar, DigestSidebar, CategorySection
+├── lib/
+│   ├── supabase/             # Client, server, and type definitions
+│   └── utils.ts              # Date formatting, reading time, slug helpers
+└── styles/
+    └── globals.css           # Design system (CSS custom properties)
+```
+
+## Design System
+
+- **Fonts**: Playfair Display (headlines), Inter (body), JetBrains Mono (labels)
+- **Accent**: Rose (#E11D48 light / #FB7185 dark)
+- **Dark mode**: System preference with manual toggle
+- **Typography**: `@tailwindcss/typography` prose classes for article content
+
+## Deployment
+
+Deploy to [Vercel](https://vercel.com) with one click — set the environment variables in the Vercel dashboard.
+
+## License
+
+MIT

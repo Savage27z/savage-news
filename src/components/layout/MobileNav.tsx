@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -19,30 +19,25 @@ export function MobileNav() {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild>
-        <button className="md:hidden p-2 -mr-2 text-foreground/70 hover:text-foreground transition-colors">
-          <Menu className="h-5 w-5" />
-          <span className="sr-only">Open menu</span>
-        </button>
+      <SheetTrigger
+        className="md:hidden p-2 -mr-2 text-foreground/70 hover:text-foreground transition-colors"
+      >
+        <Menu className="h-5 w-5" />
+        <span className="sr-only">Open menu</span>
       </SheetTrigger>
-      <SheetContent side="right" className="w-[300px] bg-background p-0">
-        <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+      <SheetContent side="right" className="w-[300px] bg-background p-0" showCloseButton={false}>
         <div className="flex flex-col h-full">
           <div className="flex items-center justify-between px-6 py-4 border-b border-border">
-            <Link
-              href="/"
-              onClick={() => setOpen(false)}
-              className="flex items-baseline gap-0.5"
-            >
-              <span className="font-serif text-xl font-bold tracking-tight">PULSE</span>
-              <span className="font-mono text-sm font-semibold text-accent">AI</span>
-            </Link>
-            <button
-              onClick={() => setOpen(false)}
-              className="p-2 -mr-2 text-foreground/70 hover:text-foreground transition-colors"
-            >
-              <X className="h-5 w-5" />
-            </button>
+            <SheetTitle>
+              <Link
+                href="/"
+                onClick={() => setOpen(false)}
+                className="flex items-baseline gap-0.5"
+              >
+                <span className="font-serif text-xl font-bold tracking-tight">PULSE</span>
+                <span className="font-mono text-sm font-semibold text-accent">AI</span>
+              </Link>
+            </SheetTitle>
           </div>
           <nav className="flex flex-col py-4">
             {navLinks.map((link) => (
