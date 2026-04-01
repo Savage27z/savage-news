@@ -27,3 +27,14 @@ export interface Article {
   updated_at: string;
   category?: Category;
 }
+
+export interface PipelineRun {
+  id: string;
+  status: "running" | "completed" | "failed";
+  topics_found: number;
+  articles_generated: number;
+  started_at: string;
+  completed_at: string | null;
+  log: { step: string; message: string; timestamp: string }[];
+  error: string | null;
+}
