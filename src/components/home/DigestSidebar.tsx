@@ -1,7 +1,8 @@
 import type { Article } from "@/lib/supabase/types";
 import { ArticleCard } from "../articles/ArticleCard";
-import { Zap, Info } from "lucide-react";
+import { Zap, Info, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { SocialTrending } from "./SocialTrending";
 
 interface DigestSidebarProps {
   articles: Article[];
@@ -11,11 +12,19 @@ export function DigestSidebar({ articles }: DigestSidebarProps) {
   return (
     <aside className="space-y-8">
       <div>
-        <div className="flex items-center gap-2 mb-4">
-          <Zap className="h-4 w-4 text-accent" />
-          <h2 className="font-mono text-xs uppercase tracking-widest font-medium">
-            Today&apos;s Brief
-          </h2>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <Zap className="h-4 w-4 text-accent" />
+            <h2 className="font-mono text-xs uppercase tracking-widest font-medium">
+              Today&apos;s Brief
+            </h2>
+          </div>
+          <Link
+            href="/digest"
+            className="flex items-center gap-1 text-xs text-accent hover:underline font-medium"
+          >
+            Full digest <ArrowRight className="h-3 w-3" />
+          </Link>
         </div>
         <div className="rounded-xl border border-border bg-card p-5">
           <div className="divide-y divide-border">
@@ -25,6 +34,8 @@ export function DigestSidebar({ articles }: DigestSidebarProps) {
           </div>
         </div>
       </div>
+
+      <SocialTrending />
 
       <div className="rounded-xl border border-border bg-card p-5">
         <div className="flex items-center gap-2 mb-3">

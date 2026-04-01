@@ -24,26 +24,31 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://pulse-ai-news.vercel.app"
+  ),
   title: {
     default: "Pulse AI — AI-Native News for Technology, AI & Science",
     template: "%s | Pulse AI",
   },
   description:
-    "Premium AI-generated journalism covering the frontiers of technology, artificial intelligence, and science. In-depth analysis, breaking news, and expert insights.",
+    "AI-powered journalism covering technology, artificial intelligence, and science. Every article researched and written through our automated editorial pipeline.",
   openGraph: {
+    type: "website",
+    siteName: "Pulse AI",
+    locale: "en_US",
     title: "Pulse AI — AI-Native News",
     description:
-      "Premium AI-generated journalism covering technology, AI & science.",
-    type: "website",
-    locale: "en_US",
-    siteName: "Pulse AI",
+      "AI-powered journalism covering technology, artificial intelligence, and science.",
+    images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Pulse AI",
     description:
-      "Premium AI-generated journalism covering technology, AI & science.",
+      "AI-powered journalism covering technology, AI & science.",
   },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
