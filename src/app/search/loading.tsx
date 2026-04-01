@@ -1,14 +1,10 @@
-export default function CategoryLoading() {
+export default function SearchLoading() {
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 animate-pulse">
-      <div className="mb-10">
-        <div className="flex items-center gap-3 mb-3">
-          <div className="h-3 w-3 rounded-full bg-muted" />
-          <div className="h-12 w-48 rounded bg-muted" />
-        </div>
-        <div className="h-6 w-96 rounded bg-muted" />
+      <div className="max-w-2xl mx-auto mb-12">
+        <div className="h-10 w-48 mx-auto rounded bg-muted mb-8" />
+        <div className="h-14 w-full rounded-xl bg-muted" />
       </div>
-
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {Array.from({ length: 6 }).map((_, i) => (
           <div key={i} className="rounded-xl border border-border overflow-hidden">

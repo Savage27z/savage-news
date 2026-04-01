@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { Sun, Moon, Search } from "lucide-react";
 import { MobileNav } from "./MobileNav";
@@ -18,6 +19,7 @@ const navLinks = [
 export function Header() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const router = useRouter();
 
   useEffect(() => setMounted(true), []);
 
@@ -43,7 +45,10 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-1">
-            <button className="p-2 text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-muted">
+            <button
+              onClick={() => router.push("/search")}
+              className="p-2 text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-muted"
+            >
               <Search className="h-4 w-4" />
               <span className="sr-only">Search</span>
             </button>
